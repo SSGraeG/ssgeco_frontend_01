@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Simple Login Template",
-    "slug": "simple-login-template",
+    "name": "eco-mileage",
+    "slug": "final-rn-fe",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -36,7 +36,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "d5a97a2a-77fe-4342-a3e8-f7837654f242"
+        "projectId": "b97cebcd-cd67-4b58-bbb9-e2342bce49d4"
       }
     }
   }

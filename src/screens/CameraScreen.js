@@ -17,6 +17,7 @@ export default function CameraScreen({ navigation }) {
     if (cameraRef.current) {
       const photo = await cameraRef.current.takePictureAsync();
       // 카메라 화면 종료
+      console.log(photo)
       navigation.goBack();
       // 사진을 서버로 전송하는 로직을 여기에 구현하세요.
       // 예: uploadPhoto(photo.uri);
