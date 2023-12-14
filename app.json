@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "Simple Login Template",
+    "slug": "simple-login-template",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "infoPlist": {
+        "NSCameraUsageDescription": "이 앱에서는 카메라가 필요합니다"
+      },
+      "supportsTablet": true,
+      "bundleIdentifier": "com.hwan515.simplelogintemplate"
+    },
+    "android": {
+      "permissions": ["CAMERA"],
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.hwan515.simplelogintemplate"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d5a97a2a-77fe-4342-a3e8-f7837654f242"
+      }
+    }
+  }
+}
