@@ -7,13 +7,13 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Paragraph from '../components/Paragraph';
 
 
-const CouponList = ({ navigation }) => {
-  const [currentMileage, setCurrentMileage] = useState(2000);
+const Donation = ({ navigation }) => {
+  const [currentMileage, setCurrentMileage] = useState(5000);
 
   const coupons = [
-    { id: 1, name: '1000원 배달 할인 쿠폰', mileageRequired: 1000 },
-    { id: 2, name: '2000원 배달 할인 쿠폰', mileageRequired: 2000 },
-    { id: 3, name: '3000원 배달 할인 쿠폰', mileageRequired: 3000 },
+    { id: 1, name: '1000원 연탄 기부', mileageRequired: 1000 },
+    { id: 2, name: '2000원 동물 보호', mileageRequired: 2000 },
+    { id: 3, name: '3000원 행복 나눔 식권', mileageRequired: 3000 },
   ];
 
   const handleExchange = (coupon) => {
@@ -45,7 +45,7 @@ const CouponList = ({ navigation }) => {
     <Background>
       <BackButton goBack={navigation.goBack} />
         <Logo />
-        <Header>쿠폰 사용하기</Header>
+        <Header>마일리지 기부</Header>
         <Text style={styles.mileageText}>현재 마일리지: {currentMileage}점</Text>
         <Paragraph>
           {coupons.map((coupon) => (
@@ -104,4 +104,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CouponList;
+export default Donation;

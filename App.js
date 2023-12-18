@@ -13,6 +13,7 @@ import {
   MyPage,
 } from './src/screens';
 import CouponList from './src/screens/CouponList';
+import Donation from './src/screens/Donation';
 
 const Stack = createStackNavigator();
 
@@ -37,6 +38,7 @@ export default function App() {
           />
           <Stack.Screen name="MyPage" component={MyPage} />
           <Stack.Screen name="CouponList" component={CouponList} />
+          <Stack.Screen name="Donation" component={Donation} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

@@ -11,8 +11,7 @@ export default function Dashboard({ navigation }) {
       <Logo />
       <Header>마일리지 적립하기</Header>
       <Paragraph>
-        Your amazing app starts here. Open your favorite code editor and start
-        editing this project.
+        지구를 지켜주세요
       </Paragraph>
       <Button mode="outlined" onPress={() => navigation.navigate('CameraScreen')}>
         사진 찍기
