@@ -9,7 +9,8 @@ import {
   RegisterScreen,
   ResetPasswordScreen,
   Dashboard,
-  CameraScreen
+  CameraScreen,
+  MyPage,
 } from './src/screens';
 
 const Stack = createStackNavigator();
@@ -33,6 +34,7 @@ export default function App() {
             name="ResetPasswordScreen"
             component={ResetPasswordScreen}
           />
+          <Stack.Screen name="MyPage" component={MyPage} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
