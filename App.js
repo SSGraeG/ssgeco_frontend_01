@@ -12,6 +12,7 @@ import {
   CameraScreen,
   MyPage,
 } from './src/screens';
+import CouponList from './src/screens/CouponList';
 
 const Stack = createStackNavigator();
 
@@ -35,6 +36,7 @@ export default function App() {
             component={ResetPasswordScreen}
           />
           <Stack.Screen name="MyPage" component={MyPage} />
+          <Stack.Screen name="CouponList" component={CouponList} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

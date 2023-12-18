@@ -1,69 +1,71 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { theme } from '../core/theme';
-import Button from '../components/Button';
+import React, { useState, useEffect } from 'react';
 import Background from '../components/Background';
 import Logo from '../components/Logo';
+import Header from '../components/Header';
+import Button from '../components/Button';
+import BackButton from '../components/BackButton';
+import { theme } from '../core/theme';
+import { Text, StyleSheet } from 'react-native';
+import Paragraph from '../components/Paragraph';
+import { useNavigation } from '@react-navigation/native';
 
 export default function MyPage() {
-  const handleButtonPress = () => {
-    // Handle button press action here
-    // For example: navigation.navigate('AnotherScreen');
-  };
+  const navigation = useNavigation();
+  const [mileageInfo, setMileageInfo] = useState({
+    mileageCount: 0,  // 마일리지 적립 횟수
+    donationCount: 0, // 기부 횟수
+    ecoMileage: 0,    // 에코 마일리지
+    coupons: []       // 보유 쿠폰 리스트
+  });
+
+  useEffect(() => {
+    // API 호출을 통해 마일리지 정보 가져오기
+    // 예: fetchMileageInfo().then(data => setMileageInfo(data));
+    // 임시 데이터로 상태 설정
+    setMileageInfo({
+      mileageCount: 10,
+      donationCount: 5,
+      ecoMileage: 150,
+      coupons: ['2000원 배달 할인 쿠폰', '1000원 배달 할인 쿠폰']
+    });
+  }, []);
 
   return (
     <Background>
-      <View style={styles.logoContainer}>
-        <Logo style={styles.logo} />
-      </View>
-      <View style={styles.container}>
-        <View style={styles.content}>
-          <Text style={styles.title}>My ECO</Text>
-          {/* Placeholder for other components */}
-          <Text>마일리지 적립 횟수 : </Text>
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button mode="contained" onPress={handleButtonPress} style={styles.customButton}>
-            사용하기
-          </Button>
-        </View>
-      </View>
+      <BackButton goBack={navigation.goBack} />
+      <Logo />
+      <Header>My ECO</Header>
+      <Paragraph>
+        <Text style={styles.infoText}>마일리지 적립 횟수: {mileageInfo.mileageCount}</Text>
+        <Text style={styles.infoText}>기부 횟수: {mileageInfo.donationCount}</Text>
+        <Text style={styles.infoText}>에코 마일리지: {mileageInfo.ecoMileage}</Text>
+        {mileageInfo.coupons.length > 0 && <Text style={styles.infoText}>보유 쿠폰:</Text>}
+        {mileageInfo.coupons.map((coupon, index) => (
+          <Text key={index} style={styles.couponText}>{coupon}</Text>
+        ))}
+      </Paragraph>
+      <Button mode="outlined" onPress={() => navigation.navigate('CouponList')}>
+        쿠폰 교환
+      </Button>
+      <Button mode="outlined" onPress={() => navigation.navigate('MyPage')}>
+        마일리지 기부
+      </Button>
     </Background>
   );
 }
 
 const styles = StyleSheet.create({
-  logoContainer: {
+  mileageInfo: {
     alignItems: 'center',
-    marginTop: 30, // Adjust this value to move the Logo component down
+    marginVertical: 20,
   },
-  logo: {
-    // Add styles for the Logo component if needed
+  infoText: {
+    fontSize: 16,
+    color: theme.colors.text, // theme.js의 텍스트 색상 사용
+    marginBottom: 4,
   },
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingTop: 20, // Adjust the paddingTop as needed
-    paddingBottom: 20,
-    paddingHorizontal: 20, // Add horizontal padding for content
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    color: theme.colors.primary,
-  },
-  buttonContainer: {
-    width: '80%', // Adjust width or other styles as needed
-    alignSelf: 'center',
-  },
-  customButton: {
-    width: '100%', // Adjust width or other styles as needed
+  couponText: {
+    fontSize: 14,
+    color: theme.colors.secondary, // theme.js의 보조 색상 사용
   },
 });
