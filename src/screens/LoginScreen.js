@@ -23,11 +23,36 @@ export default function LoginScreen({ navigation }) {
       setPassword({ ...password, error: passwordError })
       return
     }
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Dashboard' }],
+    
+    fetch('http://172.20.132.180:5000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email.value,
+        password: password.value
+      })
     })
-  }
+    .then(response => {
+      if (response.status === 200) {
+        return response.json();
+      } else if (response.status === 401) {
+        throw new Error('로그인 실패');
+      } else {
+        throw new Error('서버 오류');
+      }
+    })
+    .then(data => {
+      console.log(data)
+      navigation.reset({ index: 0, routes: [{ name: 'Dashboard' }] });
+    })
+    .catch(error => {
+      console.error('Login Error:', error);
+      setEmail({ ...email, error: '' });
+      setPassword({ ...password, error: '이메일 또는 비밀번호를 잘못 입력했습니다' });
+    });
+  };
 
   return (
     <Background>
