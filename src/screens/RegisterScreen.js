@@ -33,34 +33,34 @@ export default function RegisterScreen({ navigation }) {
       setConfirmPassword({ ...confirmPassword, error: confirmPasswordError })
       return;
     }
-    // fetch('http://172.20.132.180:5000/signup', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     email: email.value,
-    //     name: name.value,
-    //     password: password.value,
-    //     address: address.value
-    //   })
-    // })
-    // .then(response => {
-    //   if (response.status === 200) {
-    //     return response.json();
-    //   } else if (response.status === 500) {
-    //     throw new Error('회원가입 실패: 중복된 사용자');
-    //   } else {
-    //     throw new Error('서버 오류');
-    //   }
-    // })
-    // .then(data => {
-    //   console.log(data);
-    //   navigation.reset({ index: 0, routes: [{ name: 'LoginScreen' }] });
-    // })
-    // .catch(error => {
-    //   console.error('Error:', error);
-    // });
+    fetch('http://172.20.132.180:5000/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email.value,
+        name: name.value,
+        password: password.value,
+        address: address.value
+      })
+    })
+    .then(response => {
+      if (response.status === 200) {
+        return response.json();
+      } else if (response.status === 500) {
+        throw new Error('회원가입 실패: 중복된 사용자');
+      } else {
+        throw new Error('서버 오류');
+      }
+    })
+    .then(data => {
+      console.log(data);
+      navigation.reset({ index: 0, routes: [{ name: 'LoginScreen' }] });
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
   };
 
   return (
