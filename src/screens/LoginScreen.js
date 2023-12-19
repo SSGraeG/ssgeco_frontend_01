@@ -10,6 +10,7 @@ import BackButton from '../components/BackButton'
 import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
@@ -44,7 +45,8 @@ export default function LoginScreen({ navigation }) {
       }
     })
     .then(data => {
-      console.log(data)
+      AsyncStorage.setItem('Token', data.token)
+      console.log(AsyncStorage.getItem('Token'))
       navigation.reset({ index: 0, routes: [{ name: 'Dashboard' }] });
     })
     .catch(error => {
@@ -56,7 +58,7 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <Background>
-      <BackButton goBack={navigation.goBack} />
+      <BackButton goBack={() => navigation.navigate('StartScreen')} />
       <Logo />
       <Header>ECO 마일리지</Header>
       <TextInput

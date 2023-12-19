@@ -12,26 +12,56 @@ import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { nameValidator } from '../helpers/nameValidator'
 
+
 export default function RegisterScreen({ navigation }) {
-  const [name, setName] = useState({ value: '', error: '' })
-  const [email, setEmail] = useState({ value: '', error: '' })
-  const [password, setPassword] = useState({ value: '', error: '' })
+  const [name, setName] = useState({ value: '', error: '' });
+  const [email, setEmail] = useState({ value: '', error: '' });
+  const [password, setPassword] = useState({ value: '', error: '' });
+  const [confirmPassword, setConfirmPassword] = useState({ value: '', error: '' });
+  const [address, setAddress] = useState({ value: '', error: '' })
 
   const onSignUpPressed = () => {
     const nameError = nameValidator(name.value)
     const emailError = emailValidator(email.value)
     const passwordError = passwordValidator(password.value)
-    if (emailError || passwordError || nameError) {
+    const confirmPasswordError = password.value === confirmPassword.value ? '' : '비밀번호가 일치하지 않습니다.';
+
+    if (emailError || passwordError || nameError || confirmPasswordError) {
       setName({ ...name, error: nameError })
       setEmail({ ...email, error: emailError })
       setPassword({ ...password, error: passwordError })
-      return
+      setConfirmPassword({ ...confirmPassword, error: confirmPasswordError })
+      return;
     }
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'LoginScreen' }],
+    fetch('http://172.20.132.180:5000/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email.value,
+        name: name.value,
+        password: password.value,
+        address: address.value
+      })
     })
-  }
+    .then(response => {
+      if (response.status === 200) {
+        return response.json();
+      } else if (response.status === 500) {
+        throw new Error('회원가입 실패: 중복된 사용자');
+      } else {
+        throw new Error('서버 오류');
+      }
+    })
+    .then(data => {
+      console.log(data);
+      navigation.reset({ index: 0, routes: [{ name: 'LoginScreen' }] });
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  };
 
   return (
     <Background>
@@ -66,6 +96,22 @@ export default function RegisterScreen({ navigation }) {
         error={!!password.error}
         errorText={password.error}
         secureTextEntry
+      />
+      <TextInput
+        label="비밀번호 확인"
+        returnKeyType="done"
+        value={confirmPassword.value}
+        onChangeText={(text) => setConfirmPassword({ value: text, error: '' })}
+        error={!!confirmPassword.error}
+        errorText={confirmPassword.error}
+        secureTextEntry
+      />
+      <TextInput
+        label="주소"
+        returnKeyType="next"
+        value={address.value}
+        onChangeText={text => setAddress({ value: text, error: '' })}
+        // You can add other props as needed
       />
       <Button
         mode="contained"
