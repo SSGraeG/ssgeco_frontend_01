@@ -11,6 +11,7 @@ import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API_URL } from "@env";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
@@ -25,7 +26,7 @@ export default function LoginScreen({ navigation }) {
       return
     }
     
-    fetch('http://172.20.132.180:5000/login', {
+    fetch(`${API_URL}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

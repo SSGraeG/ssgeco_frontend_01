@@ -11,7 +11,7 @@ import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { nameValidator } from '../helpers/nameValidator'
-
+import { API_URL } from "@env";
 
 export default function RegisterScreen({ navigation }) {
   const [name, setName] = useState({ value: '', error: '' });
@@ -33,7 +33,7 @@ export default function RegisterScreen({ navigation }) {
       setConfirmPassword({ ...confirmPassword, error: confirmPasswordError })
       return;
     }
-    fetch('http://172.20.132.180:5000/signup', {
+    fetch(`${API_URL}/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

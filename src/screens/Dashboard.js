@@ -5,12 +5,13 @@ import Header from '../components/Header';
 import Paragraph from '../components/Paragraph';
 import Button from '../components/Button';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API_URL } from "@env";
 
 export default function Dashboard({ navigation }) {
   const handleLogout = async () => {
     try {
       const token = await AsyncStorage.getItem('Token');
-      const response = await fetch('http://172.20.132.180:5000/logout', {
+      const response = await fetch(`${API_URL}/logout`, {
         method: 'GET',
         headers: {'x-access-token': token}
       });
