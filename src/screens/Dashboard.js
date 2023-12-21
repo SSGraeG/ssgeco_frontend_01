@@ -37,11 +37,17 @@ export default function Dashboard({ navigation }) {
       <Paragraph>
         지구를 지켜주세요
       </Paragraph>
-      <Button mode="outlined" onPress={() => navigation.navigate('CameraScreen')}>
+      <Button mode="contained" onPress={() => navigation.navigate('CameraScreen')}>
         사진 찍기
       </Button>
-      <Button mode="outlined" onPress={() => navigation.navigate('MyPage')}>
+      <Button mode="outlined" onPress={() => navigation.navigate('Route')}>
         마이페이지
+      </Button>
+      <Button mode="outlined" onPress={() => navigation.navigate('CouponList')}>
+        쿠폰 교환
+      </Button>
+      <Button mode="outlined" onPress={() => navigation.navigate('Donation')}>
+        마일리지 기부
       </Button>
       <Button
         mode="outlined"

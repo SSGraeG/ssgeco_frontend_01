@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Background from '../components/Background';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
-import Button from '../components/Button';
 import BackButton from '../components/BackButton';
 import { Text } from 'react-native';
 import Paragraph from '../components/Paragraph';
@@ -31,7 +30,7 @@ export default function MyPage() {
 
   return (
     <Background>
-      <BackButton goBack={navigation.goBack} />
+      <BackButton goBack={() => navigation.navigate('Dashboard')} />
       <Logo />
       <Header>My ECO</Header>
         <Paragraph >마일리지 적립 횟수: <Text style={{ color: '#50ceca' }}>{mileageInfo.mileageCount}</Text></Paragraph>
@@ -43,12 +42,6 @@ export default function MyPage() {
             <Text style={{ color: '#50ceca' }}>{coupon}</Text>
           </Paragraph>
         ))}
-      <Button mode="outlined" onPress={() => navigation.navigate('CouponList')}>
-        쿠폰 교환
-      </Button>
-      <Button mode="outlined" onPress={() => navigation.navigate('Donation')}>
-        마일리지 기부
-      </Button>
     </Background>
   );
 }
