@@ -1,13 +1,13 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import MyPage from './MyPage';
+import MyECO from './MyECO';
 import ProfilePage from './ProfilePage';
-import { theme } from '../core/theme'
+import { theme } from '../../core/theme'
 
 const Tab = createBottomTabNavigator();
 
-export default function MainTabs() {
+export default function MyPageRoute() {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -31,7 +31,7 @@ export default function MainTabs() {
         },
       })}
     >
-      <Tab.Screen name="My ECO" component={MyPage} />
+      <Tab.Screen name="My ECO" component={MyECO} />
       <Tab.Screen name="Profile" component={ProfilePage} />
     </Tab.Navigator>
   );

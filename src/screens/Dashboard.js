@@ -41,7 +41,7 @@ export default function Dashboard({ navigation }) {
       <Button mode="contained" onPress={() => navigation.navigate('CameraScreen')}>
         사진 찍기
       </Button>
-      <Button mode="outlined" onPress={() => navigation.navigate('Route')}>
+      <Button mode="outlined" onPress={() => navigation.navigate('MyPageRoute')}>
         마이페이지
       </Button>
       <Button mode="outlined" onPress={() => navigation.navigate('CouponList')}>

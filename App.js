@@ -10,12 +10,12 @@ import {
   ResetPasswordScreen,
   Dashboard,
   CameraScreen,
-  MyPage,
+  MyECO,
 } from './src/screens';
 import CouponList from './src/screens/CouponList';
 import Donation from './src/screens/Donation';
-import Route from './src/screens/Route';
-import ProfilePage from './src/screens/ProfilePage';
+import MyPageRoute from './src/screens/mypage/MyPageRoute';
+import ProfilePage from './src/screens/mypage/ProfilePage';
 
 
 const Stack = createStackNavigator();
@@ -39,10 +39,10 @@ export default function App() {
             name="ResetPasswordScreen"
             component={ResetPasswordScreen}
           />
-          <Stack.Screen name="MyPage" component={MyPage} />
+          <Stack.Screen name="MyECO" component={MyECO} />
           <Stack.Screen name="CouponList" component={CouponList} />
           <Stack.Screen name="Donation" component={Donation} />
-          <Stack.Screen name="Route" component={Route} />
+          <Stack.Screen name="MyPageRoute" component={MyPageRoute} />
           <Stack.Screen name="ProfilePage" component={ProfilePage} />
         </Stack.Navigator>
       </NavigationContainer>
