@@ -24,6 +24,7 @@ export default function RegisterScreen({ navigation }) {
     const emailError = emailValidator(email.value)
     const passwordError = passwordValidator(password.value)
     const confirmPasswordError = password.value === confirmPassword.value ? '' : '비밀번호가 일치하지 않습니다.';
+    const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
     if (emailError || passwordError || nameError || confirmPasswordError) {
       setName({ ...name, error: nameError })
@@ -32,7 +33,7 @@ export default function RegisterScreen({ navigation }) {
       setConfirmPassword({ ...confirmPassword, error: confirmPasswordError })
       return;
     }
-    fetch('http://172.20.132.102:5000/signup', {
+    fetch(apiUrl + '/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

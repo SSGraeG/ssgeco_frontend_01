@@ -7,10 +7,12 @@ import Button from '../components/Button';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Dashboard({ navigation }) {
+  const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+
   const handleLogout = async () => {
     try {
       const token = await AsyncStorage.getItem('Token');
-      const response = await fetch('http://172.20.132.102:5000/logout', {
+      const response = await fetch(apiUrl + '/logout', {
         method: 'GET',
         headers: {'x-access-token': token}
       });
