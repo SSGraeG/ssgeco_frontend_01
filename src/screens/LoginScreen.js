@@ -28,9 +28,7 @@ export default function LoginScreen({ navigation }) {
     
     fetch(apiUrl + '/login', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email: email.value,
         password: password.value
@@ -40,7 +38,7 @@ export default function LoginScreen({ navigation }) {
       if (response.status === 200) {
         return response.json();
       } else if (response.status === 401) {
-        throw new Error('로그인 실패');
+        throw new Error('잘못된 로그인 정보');
       } else {
         throw new Error('서버 오류');
       }

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Text, StyleSheet } from 'react-native';
+import { Card } from 'react-native-elements';
 import Background from '../../components/Background';
 import Logo from '../../components/Logo';
 import Header from '../../components/Header';
 import BackButton from '../../components/BackButton';
-import { Text } from 'react-native';
-import Paragraph from '../../components/Paragraph';
 import { useNavigation } from '@react-navigation/native';
 
 export default function MyECO() {
@@ -33,15 +33,41 @@ export default function MyECO() {
       <BackButton goBack={() => navigation.navigate('Dashboard')} />
       <Logo />
       <Header>My ECO</Header>
-        <Paragraph >마일리지 적립 횟수: <Text style={{ color: '#50ceca' }}>{mileageInfo.mileageCount}</Text></Paragraph>
-        <Paragraph>기부 횟수: <Text style={{ color: '#50ceca' }}>{mileageInfo.donationCount}</Text></Paragraph>
-        <Paragraph>에코 마일리지: <Text style={{ color: '#50ceca' }}>{mileageInfo.ecoMileage}</Text></Paragraph>
-        {mileageInfo.coupons.length > 0 && <Paragraph>보유 쿠폰</Paragraph>}
-        {mileageInfo.coupons.map((coupon, index) => (
-          <Paragraph key={index}>
-            <Text style={{ color: '#50ceca' }}>{coupon}</Text>
-          </Paragraph>
-        ))}
+      <Card containerStyle={styles.cardStyle}>
+        <Card.Title>마일리지 정보</Card.Title>
+        <Card.Divider />
+        <Text>마일리지 적립 횟수: {mileageInfo.mileageCount}</Text>
+        <Text>기부 횟수: {mileageInfo.donationCount}</Text>
+        <Text>에코 마일리지: {mileageInfo.ecoMileage}</Text>
+      </Card>
+      {mileageInfo.coupons.length > 0 && (
+        <Card containerStyle={styles.cardStyle}>
+          <Card.Title>보유 쿠폰</Card.Title>
+          <Card.Divider />
+          {mileageInfo.coupons.map((coupon, index) => (
+            <Text key={index}>{coupon}</Text>
+          ))}
+        </Card>
+      )}
     </Background>
   );
 }
+
+const styles = StyleSheet.create({
+  cardStyle: {
+    width: '90%',
+    alignSelf: 'center',
+    marginBottom: 10,
+  },
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    // 카드 타이틀 스타일
+  },
+  cardContent: {
+    fontSize: 16,
+    // 카드 내용 스타일
+  },
+  // 필요한 경우 여기에 추가 스타일 정의
+});

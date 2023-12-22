@@ -9,14 +9,21 @@ import { useNavigation } from '@react-navigation/native';
 export default function ProfilePage() {
     const navigation = useNavigation();
 
-  return (
-    <Background>
-      <BackButton goBack={() => navigation.navigate('Dashboard')} />
-      <Logo />
-      <Header>회원 정보</Header>
-      <Paragraph >이름: </Paragraph>
-      <Paragraph >이메일:</Paragraph>
-      <Paragraph>주소:</Paragraph>
-    </Background>
-  );
+    // 임시 데이터
+    const userInfo = {
+        name: '홍길동',
+        email: 'gildong@example.com',
+        address: '서울특별시 강남구'
+    };
+
+    return (
+        <Background>
+            <BackButton goBack={() => navigation.navigate('Dashboard')} />
+            <Logo />
+            <Header>회원 정보</Header>
+            <Paragraph>이름: {userInfo.name}</Paragraph>
+            <Paragraph>이메일: {userInfo.email}</Paragraph>
+            <Paragraph>주소: {userInfo.address}</Paragraph>
+        </Background>
+    );
 }

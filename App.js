@@ -12,11 +12,11 @@ import {
   CameraScreen,
   MyECO,
 } from './src/screens';
-import CouponList from './src/screens/CouponList';
-import Donation from './src/screens/Donation';
+import CouponList from './src/screens/mileage/CouponList';
+import Donation from './src/screens/mileage/Donation';
 import MyPageRoute from './src/screens/mypage/MyPageRoute';
 import ProfilePage from './src/screens/mypage/ProfilePage';
-import MileageRoute from './src/screens/MileageRoute'
+import MileageRoute from './src/screens/mileage/MileageRoute'
 
 
 const Stack = createStackNavigator();
