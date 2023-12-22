@@ -44,12 +44,12 @@ export default function Dashboard({ navigation }) {
       <Button mode="outlined" onPress={() => navigation.navigate('MyPageRoute')}>
         마이페이지
       </Button>
-      <Button mode="outlined" onPress={() => navigation.navigate('CouponList')}>
-        쿠폰 교환
+      <Button mode="outlined" onPress={() => navigation.navigate('MileageRoute')}>
+        마일리지 사용
       </Button>
-      <Button mode="outlined" onPress={() => navigation.navigate('Donation')}>
+      {/* <Button mode="outlined" onPress={() => navigation.navigate('Donation')}>
         마일리지 기부
-      </Button>
+      </Button> */}
       <Button
         mode="outlined"
         onPress={handleLogout}
