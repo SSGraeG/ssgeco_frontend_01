@@ -11,13 +11,15 @@ import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { nameValidator } from '../helpers/nameValidator'
+import { useNavigation } from '@react-navigation/native';
 
-export default function RegisterScreen({ navigation }) {
+export default function RegisterScreen() {
   const [name, setName] = useState({ value: '', error: '' });
   const [email, setEmail] = useState({ value: '', error: '' });
   const [password, setPassword] = useState({ value: '', error: '' });
   const [confirmPassword, setConfirmPassword] = useState({ value: '', error: '' });
   const [address, setAddress] = useState({ value: '', error: '' })
+  const navigation = useNavigation();
 
   const onSignUpPressed = () => {
     const nameError = nameValidator(name.value)
@@ -35,7 +37,9 @@ export default function RegisterScreen({ navigation }) {
     }
     fetch(apiUrl + '/signup', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({
         email: email.value,
         name: name.value,
@@ -104,13 +108,9 @@ export default function RegisterScreen({ navigation }) {
         errorText={confirmPassword.error}
         secureTextEntry
       />
-      <TextInput
-        label="주소"
-        returnKeyType="next"
-        value={address.value}
-        onChangeText={text => setAddress({ value: text, error: '' })}
-        // You can add other props as needed
-      />
+      <Button mode="outlined" onPress={() => navigation.navigate('AddressScreen')}>
+        주소 입력
+      </Button>
       <Button
         mode="contained"
         onPress={onSignUpPressed}
