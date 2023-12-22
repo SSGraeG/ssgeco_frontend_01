@@ -11,6 +11,7 @@ import {
   Dashboard,
   CameraScreen,
   MyECO,
+  AddressScreen,
 } from './src/screens';
 import CouponList from './src/screens/mileage/CouponList';
 import Donation from './src/screens/mileage/Donation';
@@ -46,6 +47,7 @@ export default function App() {
           <Stack.Screen name="MyPageRoute" component={MyPageRoute} />
           <Stack.Screen name="ProfilePage" component={ProfilePage} />
           <Stack.Screen name="MileageRoute" component={MileageRoute} />
+          <Stack.Screen name="AddressScreen" component={AddressScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
