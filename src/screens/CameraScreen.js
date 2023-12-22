@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Camera } from 'expo-camera';
 import { View, StyleSheet, TouchableHighlight, Alert } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
+import BackButton from '../components/BackButton';
 
 export default function CameraScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -79,6 +80,7 @@ export default function CameraScreen({ navigation }) {
   return (
     <View style={styles.container}>
     <Camera ref={cameraRef} style={styles.camera} type={Camera.Constants.Type.back}>
+    <BackButton goBack={navigation.goBack} />
       <View style={styles.buttonContainer}>
         <TouchableHighlight style={styles.captureButton} onPress={takePicture}>
           <View />
