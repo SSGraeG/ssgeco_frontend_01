@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MyECO from './MyECO';
 import ProfilePage from './ProfilePage';
+import MileageHistory from './MyMileageHistory';
 import { theme } from '../../core/theme'
 
 const Tab = createBottomTabNavigator();
@@ -28,6 +29,8 @@ export default function MyPageRoute() {
             iconName = 'leaf';
           } else if (route.name === 'Profile') {
             iconName = focused ? 'user' : 'user-o';
+          } else if (route.name === 'History') {
+            iconName = 'history';
           }
           return <FontAwesome name={iconName} size={size} color={color} />;
         },
@@ -49,6 +52,11 @@ export default function MyPageRoute() {
       <Tab.Screen 
         name="Profile" 
         component={ProfilePage} 
+        options={commonHeaderStyle}
+      />
+      <Tab.Screen 
+        name="History" 
+        component={MileageHistory} 
         options={commonHeaderStyle}
       />
     </Tab.Navigator>
