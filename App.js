@@ -11,12 +11,14 @@ import {
   Dashboard,
   CameraScreen,
   MyECO,
+  AddressScreen,
 } from './src/screens';
 import CouponList from './src/screens/mileage/CouponList';
 import Donation from './src/screens/mileage/Donation';
 import MyPageRoute from './src/screens/mypage/MyPageRoute';
 import ProfilePage from './src/screens/mypage/ProfilePage';
-import MileageRoute from './src/screens/mileage/MileageRoute'
+import MileageRoute from './src/screens/mileage/MileageRoute';
+import MileageHistory from './src/screens/mypage/MyMileageHistory';
 
 
 const Stack = createStackNavigator();
@@ -46,6 +48,8 @@ export default function App() {
           <Stack.Screen name="MyPageRoute" component={MyPageRoute} />
           <Stack.Screen name="ProfilePage" component={ProfilePage} />
           <Stack.Screen name="MileageRoute" component={MileageRoute} />
+          <Stack.Screen name="AddressScreen" component={AddressScreen} />
+          <Stack.Screen name="MyMileageHistory" component={MileageHistory} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
