@@ -9,8 +9,10 @@ npm-debug.*
 *.orig.*
 web-build/
 android
+.env
 
 # macOS
 .DS_Store
 yarn.lock
 .expo-shared
+.env
