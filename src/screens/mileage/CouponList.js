@@ -13,7 +13,7 @@ const CouponList = ({ navigation }) => {
 
   // 쿠폰 리스트 불러오는 로직
   useEffect(() => {
-    fetch(apiUrl + '/coupon_list')
+    fetch(`${apiUrl}/coupon_list`)
       .then(response => {
         if (response.status === 200) {
           return response.json();
