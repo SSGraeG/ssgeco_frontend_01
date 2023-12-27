@@ -5,15 +5,53 @@ import Background from '../../components/Background';
 import Logo from '../../components/Logo';
 import Header from '../../components/Header';
 import BackButton from '../../components/BackButton';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CouponList = ({ navigation }) => {
   const [currentMileage, setCurrentMileage] = useState();
   const [coupons, setCoupons] = useState([]);
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
-
-  // 쿠폰 리스트 불러오는 로직
+  
+  const handleExchange = async (coupon) => {
+    try {
+      const token = await AsyncStorage.getItem('Token');
+      const response = await fetch(`${apiUrl}/coupon_use`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': token,
+        },
+        body: JSON.stringify({ coupon_id: coupon.id }), // 해당 쿠폰의 ID 전송
+      });
+  
+      if (response.status === 200) {
+        const newMileageResponse = await fetch(`${apiUrl}/get_user_mileage`, {
+          headers: { 'x-access-token': token }
+        });
+  
+        if (newMileageResponse.status === 200) {
+          const data = await newMileageResponse.json();
+          setCurrentMileage(data.mileage);
+          alert(`쿠폰 전환 성공! 현재 잔액: ${data.mileage}점`);
+        } else if (newMileageResponse.status === 500) {
+          throw new Error('마일리지 업데이트 중 에러가 발생했습니다');
+        } else {
+          throw new Error('서버 오류');
+        }
+      } else if (response.status === 500) {
+        throw new Error('요청 중 에러가 발생했습니다');
+      } else {
+        throw new Error('서버 오류');
+      }
+    } catch (error) {
+        console.error('쿠폰 사용 중 오류 발생:', error);
+        alert(`쿠폰 사용 중 오류 발생`);
+    }
+  };
+  
+  
   useEffect(() => {
-    fetch(apiUrl + '/coupon_list')
+    fetch(`${apiUrl}/coupon_list`)
       .then(response => {
         if (response.status === 200) {
           return response.json();
@@ -24,20 +62,43 @@ const CouponList = ({ navigation }) => {
         }
       })
       .then(data => {
-        // 서버로부터 받은 데이터의 'coupon' 필드가 배열인지 확인
         if (Array.isArray(data.coupon)) {
           setCoupons(data.coupon);
         } else {
-          // 'coupon' 필드가 배열이 아닐 경우, 빈 배열로 설정
           setCoupons([]);
         }
       })
       .catch(error => {
         console.error('Error fetching coupons:', error);
-        // 오류 발생 시, 빈 배열로 설정
         setCoupons([]);
       });
   }, []);  
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = await AsyncStorage.getItem('Token');
+        const response = await fetch(`${apiUrl}/get_user_mileage`, {
+          headers: { 'x-access-token': token }
+        });
+  
+        if (response.status === 200) {
+          const data = await response.json();
+          setCurrentMileage(data.mileage);
+        } else if (response.status === 500) {
+          throw new Error('요청 중 에러가 발생했습니다');
+        } else {
+          throw new Error('서버 오류');
+        }
+      } catch (error) {
+        console.error('사용자 마일리지를 가져오는 중 오류 발생:', error);
+        setCurrentMileage(0);
+      }
+    };
+  
+    fetchData();
+  }, []);
+  
 
   return (
     <Background>
