@@ -32,7 +32,7 @@ const Donation = ({ navigation }) => {
         if (newMileageResponse.status === 200) {
           const data = await newMileageResponse.json();
           setCurrentMileage(data.mileage);
-          alert(`쿠폰 전환 성공! 현재 잔액: ${data.mileage}점`);
+          alert(`기부 감사합니다! 현재 잔액: ${data.mileage}점`);
         } else if (newMileageResponse.status === 500) {
           throw new Error('마일리지 업데이트 중 에러가 발생했습니다');
         } else {
