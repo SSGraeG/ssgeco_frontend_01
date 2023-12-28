@@ -33,6 +33,7 @@
     "react-native-vector-icons": "^10.0.3",
     "react-native-web": "0.19.9",
     "react-native-webview": "13.2.2",
+    "semver": "^7.5.4",
     "uglify-js": "^3.17.4",
     "uuid": "^9.0.1"
   },
