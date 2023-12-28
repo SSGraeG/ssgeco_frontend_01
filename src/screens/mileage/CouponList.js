@@ -102,7 +102,7 @@ const CouponList = ({ navigation }) => {
 
   return (
     <Background>
-      <BackButton goBack={navigation.goBack} />
+      <BackButton goBack={() => navigation.navigate('Dashboard')} />
       <Logo />
       <Header>쿠폰 전환하기</Header>
       <Text style={styles.mileageText}>현재 마일리지: {currentMileage}점</Text>
