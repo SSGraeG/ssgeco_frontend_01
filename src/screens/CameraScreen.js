@@ -3,13 +3,15 @@ import { Camera } from 'expo-camera';
 import { View, StyleSheet, TouchableHighlight, Alert } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import BackButton from '../components/BackButton';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function CameraScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const cameraRef = useRef(null);
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
-  
+
+
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
@@ -31,12 +33,14 @@ export default function CameraScreen({ navigation }) {
         name: 'photo.jpg',
       });
       try {
+        const token = await AsyncStorage.getItem('Token');
         const response = await fetch(apiUrl + '/image', {
           method: 'POST',
           body: formData,
           headers: {
             'Content-Type': 'multipart/form-data',
-            // 필요에 따라 추가 헤더를 설정할 수 있습니다.
+            'x-access-token': token,
+         
           },
         });
        
@@ -45,7 +49,7 @@ export default function CameraScreen({ navigation }) {
           console.log(data.message); // 서버에서 온 데이터 확인
           if (data.message === "성공") {
             // 성공적인 응답 처리
-            Alert.alert('성공', '깨끗하네요');
+            Alert.alert(`성공!현재 잔액: ${data.mileage}점`);
             
             navigation.goBack();
           } else {
@@ -53,11 +57,11 @@ export default function CameraScreen({ navigation }) {
             Alert.alert('실패', '더 깨끗이 씻어주세요..');
             navigation.goBack();
           }
-          // Alert.alert('성공', '사진을 서버로 전송했습니다.');
-          // console.log(response.json().data)
-          // navigation.goBack();
+   
         } else {
+          Alert.alert('오류', '이미지 전송에 실패했습니다.');
           throw new Error('이미지 전송 실패');
+          
         }
       } catch (error) {
         console.error('이미지 전송 오류:', error);
