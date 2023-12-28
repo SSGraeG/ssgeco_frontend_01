@@ -63,11 +63,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
-    // 카드 타이틀 스타일
   },
   cardContent: {
     fontSize: 16,
-    // 카드 내용 스타일
   },
-  // 필요한 경우 여기에 추가 스타일 정의
 });
