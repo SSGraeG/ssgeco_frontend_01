@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
-import { Text } from 'react-native-paper'
+import React, { useState, useEffect } from 'react';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
+import { Paragraph } from 'react-native-paper'
 import Background from '../components/Background'
-import Logo from '../components/Logo'
 import Header from '../components/Header'
 import Button from '../components/Button'
 import TextInput from '../components/TextInput'
@@ -13,13 +12,26 @@ import { passwordValidator } from '../helpers/passwordValidator'
 import { nameValidator } from '../helpers/nameValidator'
 import { useNavigation } from '@react-navigation/native';
 
-export default function RegisterScreen() {
+export default function RegisterScreen({ route }) {
   const [name, setName] = useState({ value: '', error: '' });
   const [email, setEmail] = useState({ value: '', error: '' });
   const [password, setPassword] = useState({ value: '', error: '' });
   const [confirmPassword, setConfirmPassword] = useState({ value: '', error: '' });
-  const [address, setAddress] = useState({ value: '', error: '' })
+  const [address, setAddress] = useState({ value: '', error: '' });
+  const [showAddressInput, setShowAddressInput] = useState(true);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    if (route.params?.selectedAddress) {
+      setAddress({ value: route.params.selectedAddress, error: '' });
+    }
+  }, [route.params]);
+
+  useEffect(() => {
+    if (route.params?.selectedAddress) {
+      setAddress({ value: route.params.selectedAddress, error: '' });
+    }
+  }, [route.params]);
 
   const onSignUpPressed = () => {
     const nameError = nameValidator(name.value)
@@ -68,7 +80,6 @@ export default function RegisterScreen() {
   return (
     <Background>
       <BackButton goBack={navigation.goBack} />
-      <Logo />
       <Header>회원가입</Header>
       <TextInput
         label="사용자 이름"
@@ -111,6 +122,14 @@ export default function RegisterScreen() {
       <Button mode="outlined" onPress={() => navigation.navigate('AddressScreen')}>
         주소 입력
       </Button>
+
+      {address.value && (
+        <View style={styles.addressContainer}>
+          <View style={styles.addressBox}>
+            <Text>{address.value}</Text>
+          </View>
+        </View>
+      )}
       <Button
         mode="contained"
         onPress={onSignUpPressed}
@@ -119,9 +138,9 @@ export default function RegisterScreen() {
         회원가입
       </Button>
       <View style={styles.row}>
-        <Text>계정이 이미 있나요?</Text>
+        <Paragraph>계정이 이미 있나요?</Paragraph>
         <TouchableOpacity onPress={() => navigation.replace('LoginScreen')}>
-          <Text style={styles.link}>로그인</Text>
+          <Paragraph style={styles.link}>로그인</Paragraph>
         </TouchableOpacity>
       </View>
     </Background>
@@ -137,5 +156,34 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 5,
     color: theme.colors.primary,
+  },
+  addressContainer: {
+    width: '100%',
+    marginVertical: 12,
+  },
+  addressLabelContainer: {
+    position: 'absolute',
+    top: -14,
+    left: 10,
+    backgroundColor: theme.colors.background,
+    paddingHorizontal: 8,
+    color: theme.colors.primary,
+    fontWeight: 'bold',
+  },
+  addressLabel: {
+    color: theme.colors.primary,
+    backgroundColor: theme.colors.surface,
+    padding: 10,
+    fontSize: 13,
+  },
+  addressBox: {
+    paddingHorizontal: 15,
+    borderWidth: 1,
+    borderColor: theme.colors.primary,
+    borderRadius: 5,
+    backgroundColor: theme.colors.surface,
+    width: '100%',
+    minHeight: 40,
+    justifyContent: 'center',
   },
 })
