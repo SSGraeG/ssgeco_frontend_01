@@ -18,19 +18,11 @@ export default function RegisterScreen({ route }) {
   const [password, setPassword] = useState({ value: '', error: '' });
   const [confirmPassword, setConfirmPassword] = useState({ value: '', error: '' });
   const [address, setAddress] = useState({ value: '', error: '' });
-  const [showAddressInput, setShowAddressInput] = useState(true);
   const navigation = useNavigation();
 
   useEffect(() => {
     if (route.params?.selectedAddress) {
       setAddress({ value: route.params.selectedAddress, error: '' });
-    }
-  }, [route.params]);
-
-  useEffect(() => {
-    if (route.params?.selectedAddress) {
-      setAddress({ value: route.params.selectedAddress, error: '' });
-      setShowAddressInput(false); // 주소가 선택되면 버튼을 숨깁니다.
     }
   }, [route.params]);
 
@@ -48,7 +40,7 @@ export default function RegisterScreen({ route }) {
       setConfirmPassword({ ...confirmPassword, error: confirmPasswordError })
       return;
     }
-    fetch(apiUrl + '/signup', {
+    fetch(`${apiUrl}/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -120,15 +112,14 @@ export default function RegisterScreen({ route }) {
         errorText={confirmPassword.error}
         secureTextEntry
       />
-      {showAddressInput && (
-        <Button mode="outlined" onPress={() => navigation.navigate('AddressScreen')}>
-          주소 입력
-        </Button>
-      )}
+      <Button mode="outlined" onPress={() => navigation.navigate('AddressScreen')}>
+        주소 입력
+      </Button>
+
       {address.value && (
         <View style={styles.addressContainer}>
-          <View style={styles.addressLabelContainer}>
-            <Text style={styles.addressLabel}>주소: {address.value}</Text>
+          <View style={styles.addressBox}>
+            <Text>{address.value}</Text>
           </View>
         </View>
       )}
@@ -160,28 +151,32 @@ const styles = StyleSheet.create({
     color: theme.colors.primary,
   },
   addressContainer: {
-    marginTop: 10,
-    alignItems: 'center',
     width: '100%',
+    marginVertical: 12,
   },
   addressLabelContainer: {
     position: 'absolute',
-    top: -14, // 이 값은 주소 라벨의 높이에 따라 조정해야 할 수 있습니다.
+    top: -14,
+    left: 10,
     backgroundColor: theme.colors.background,
     paddingHorizontal: 8,
-    zIndex: 1,
-  },
-  addressLabel: {
     color: theme.colors.primary,
     fontWeight: 'bold',
   },
+  addressLabel: {
+    color: theme.colors.primary,
+    backgroundColor: theme.colors.surface,
+    padding: 10,
+    fontSize: 13,
+  },
   addressBox: {
-    paddingTop: 20, // 주소 라벨의 높이에 맞게 패딩 조정
     paddingHorizontal: 15,
     borderWidth: 1,
     borderColor: theme.colors.primary,
     borderRadius: 5,
-    backgroundColor: '#fff',
+    backgroundColor: theme.colors.surface,
     width: '100%',
+    minHeight: 40,
+    justifyContent: 'center',
   },
 })
