@@ -10,6 +10,7 @@ npm-debug.*
 web-build/
 android
 .env
+.idea
 
 # macOS
 .DS_Store

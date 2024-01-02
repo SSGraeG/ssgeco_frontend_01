@@ -99,7 +99,7 @@ const MileageHistory = ({ navigation }) => {
           if (date === selectedEndDate) {
             markedDates[date] = { endingDay: true, color: theme.colors.primary, textColor: 'white' };
           } else if (date !== selectedStartDate) {
-            markedDates[date] = { color: theme.colors.primary, textColor: 'black' };
+            markedDates[date] = { color: theme.colors.primary, textColor: 'white' };
           }
         });
       }
