@@ -18,14 +18,7 @@ export default function RegisterScreen({ route }) {
   const [password, setPassword] = useState({ value: '', error: '' });
   const [confirmPassword, setConfirmPassword] = useState({ value: '', error: '' });
   const [address, setAddress] = useState({ value: '', error: '' });
-  const [showAddressInput, setShowAddressInput] = useState(true);
   const navigation = useNavigation();
-
-  useEffect(() => {
-    if (route.params?.selectedAddress) {
-      setAddress({ value: route.params.selectedAddress, error: '' });
-    }
-  }, [route.params]);
 
   useEffect(() => {
     if (route.params?.selectedAddress) {
@@ -47,7 +40,7 @@ export default function RegisterScreen({ route }) {
       setConfirmPassword({ ...confirmPassword, error: confirmPasswordError })
       return;
     }
-    fetch(apiUrl + '/signup', {
+    fetch(`${apiUrl}/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

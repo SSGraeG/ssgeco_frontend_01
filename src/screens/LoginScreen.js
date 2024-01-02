@@ -26,7 +26,7 @@ export default function LoginScreen({ navigation }) {
       return
     }
     
-    fetch(apiUrl + '/login', {
+    fetch(`${apiUrl}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
