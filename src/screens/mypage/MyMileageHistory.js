@@ -25,7 +25,7 @@ const MileageHistory = ({ navigation }) => {
   const fetchMileageHistory = async () => {
     try {
       const token = await AsyncStorage.getItem('Token');
-      const url = apiUrl + '/get_mileage_tracking'; // 백엔드 API 엔드포인트에 맞게 수정해야 합니다.
+      const url = apiUrl + '/get_mileage_tracking';
       const response = await fetch(url, {
         method: 'GET',
         headers: {
@@ -38,18 +38,17 @@ const MileageHistory = ({ navigation }) => {
       }
   
       const responseData = await response.json();
-      return responseData.result; // 서버에서 받은 데이터를 반환합니다.
+      return responseData.result; 
     } catch (error) {
       console.error('Error fetching mileage history:', error.message);
-      // 에러 핸들링 또는 에러 메시지 표시 등의 로직 추가 가능
-      return []; // 에러가 발생하면 빈 배열을 반환합니다.
+      return []; 
     }
   };
   
   const sendSelectedDatesToBackend = async (selectedStartDate, selectedEndDate) => {
     try {
       const token = await AsyncStorage.getItem('Token');
-      const url = apiUrl + '/get_mileage_tracking'; // Replace with your actual backend API endpoint
+      const url = apiUrl + '/get_mileage_tracking'; 
       const requestBody = {
         start_date: selectedStartDate,
         end_date: selectedEndDate,
@@ -59,8 +58,7 @@ const MileageHistory = ({ navigation }) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-access-token': token,
-          // Add any necessary headers (e.g., authorization token) here
+          'x-access-token': token
         },
         body: JSON.stringify(requestBody),
       });
@@ -69,17 +67,14 @@ const MileageHistory = ({ navigation }) => {
         throw new Error('Network response was not ok');
       }
   
-      // Handle the response from the backend if needed
-      const responseData = await response.json();
-      // setHistory(responseData.result); // responseData.result를 history 상태로 설정
 
-      // const newHistory = await fetchMileageHistory(responseData.result);
+      const responseData = await response.json();
+     
       setHistory(responseData.result);
       console.log('Response from backend:', responseData.result);
-      // Do something with the response data if required
+
     } catch (error) {
       console.error('Error sending data to backend:', error.message);
-      // Handle errors, show an error message, etc.
     }
   };
   
