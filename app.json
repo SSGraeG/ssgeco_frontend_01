@@ -21,7 +21,7 @@
         "NSCameraUsageDescription": "이 앱에서는 카메라가 필요합니다"
       },
       "supportsTablet": true,
-      "bundleIdentifier": "com.hwan515.simplelogintemplate"
+      "bundleIdentifier": "com.hwan515.ECO"
     },
     "android": {
       "permissions": ["CAMERA"],
@@ -29,7 +29,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.hwan515.simplelogintemplate"
+      "package": "com.hwan515.ECO"
     },
     "web": {
       "favicon": "./assets/favicon.png"
