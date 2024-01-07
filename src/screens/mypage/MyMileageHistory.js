@@ -5,13 +5,16 @@ import Background from '../../components/Background';
 import Header from '../../components/Header';
 import BackButton from '../../components/BackButton';
 import { Calendar } from 'react-native-calendars';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { theme } from '../../core/theme';
+
 
 const MileageHistory = ({ navigation }) => {
   const [history, setHistory] = useState([]);
   const [isCalendarVisible, setCalendarVisible] = useState(false);
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
+  const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
   useEffect(() => {
     fetchMileageHistory().then(data => {
@@ -19,28 +22,62 @@ const MileageHistory = ({ navigation }) => {
     });
   }, []);
 
-  const fetchMileageHistory = () => {
-    // Fetch data from backend
-    return Promise.resolve([
-      /* Sample data */
-      {
-        use_date: '2023-12-05',
-        mileage: 1000,
-        mileage_category_id: '4'
-      },
-      {
-        use_date: '2023-12-10',
-        mileage: 200,
-        mileage_category_id: '5'
-      },
-      {
-        use_date: '2023-12-15',
-        mileage: 150,
-        mileage_category_id: '4'
+  const fetchMileageHistory = async () => {
+    try {
+      const token = await AsyncStorage.getItem('Token');
+      const url = apiUrl + '/get_mileage_tracking';
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'x-access-token': token,
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
-    ]);
+  
+      const responseData = await response.json();
+      return responseData.result; 
+    } catch (error) {
+      console.error('Error fetching mileage history:', error.message);
+      return []; 
+    }
   };
+  
+  const sendSelectedDatesToBackend = async (selectedStartDate, selectedEndDate) => {
+    try {
+      const token = await AsyncStorage.getItem('Token');
+      const url = apiUrl + '/get_mileage_tracking'; 
+      const requestBody = {
+        start_date: selectedStartDate,
+        end_date: selectedEndDate,
+      };
+    console.log(selectedStartDate, selectedEndDate)
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': token
+        },
+        body: JSON.stringify(requestBody),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
 
+      const responseData = await response.json();
+     
+      setHistory(responseData.result);
+      console.log('Response from backend:', responseData.result);
+
+    } catch (error) {
+      console.error('Error sending data to backend:', error.message);
+    }
+  };
+  
   const showCalendar = () => {
     setCalendarVisible(true);
   };
@@ -48,13 +85,24 @@ const MileageHistory = ({ navigation }) => {
   const handleCalendarConfirm = () => {
     setCalendarVisible(false);
     // Add additional logic if needed
+    if (selectedStartDate && selectedEndDate) {
+      sendSelectedDatesToBackend(selectedStartDate, selectedEndDate);
+    }
   };
 
   const handleCalendarCancel = () => {
     setCalendarVisible(false);
-    // Add additional logic if needed
+ 
+  
   };
 
+  const formatDate = (date) => {
+    const year = date.getFullYear();
+    let month = (1 + date.getMonth()).toString().padStart(2, '0');
+    let day = date.getDate().toString().padStart(2, '0');
+  
+    return `${year}-${month}-${day}`;
+  };
   const onDayPress = (day) => {
     // 시작 날짜가 없거나 이미 시작과 종료 날짜가 모두 선택된 경우
     if (!selectedStartDate || (selectedStartDate && selectedEndDate)) {
@@ -62,7 +110,7 @@ const MileageHistory = ({ navigation }) => {
         setSelectedEndDate(null); // 종료 날짜 초기화
     } 
     // 시작 날짜가 설정되어 있고, 선택된 날짜가 시작 날짜 이후인 경우
-    else if (day.dateString > selectedStartDate) {
+    else if (day.dateString >= selectedStartDate) {
         setSelectedEndDate(day.dateString); // 종료 날짜를 설정
     } 
     // 시작 날짜가 설정되어 있고, 선택된 날짜가 시작 날짜 이전인 경우
@@ -71,6 +119,7 @@ const MileageHistory = ({ navigation }) => {
         setSelectedEndDate(null); // 종료 날짜 초기화
     }
   };
+  
 
   // 시작 날짜와 종료 날짜 사이의 모든 날짜를 계산하는 함수
   const getDatesBetween = (startDate, endDate) => {
@@ -116,6 +165,7 @@ const MileageHistory = ({ navigation }) => {
     return (!startDate || use_date >= startDate) && (!endDate || use_date <= endDate);
   });
 
+
   return (
     <Background>
       <BackButton goBack={() => navigation.navigate('Dashboard')} />
@@ -153,17 +203,21 @@ const MileageHistory = ({ navigation }) => {
           </View>
         </View>
       </Modal>
-      <ScrollView style={styles.container}>
-        {filteredHistory.map((item, index) => (
-          <Card key={index}>
-            <Card.Title>사용 내역</Card.Title>
-            <Card.Divider />
-            <Card.FeaturedSubtitle>날짜: {item.use_date}</Card.FeaturedSubtitle>
-            <Card.FeaturedSubtitle>사용 포인트: {item.mileage}</Card.FeaturedSubtitle>
-            <Card.FeaturedSubtitle>사용처: {item.mileage_category_id}</Card.FeaturedSubtitle>
-          </Card>
-        ))}
-      </ScrollView>
+   
+<ScrollView style={styles.container}>
+{history.map((item, index) => (
+  <Card key={index}>
+    <Card.Title>사용 내역</Card.Title>
+    <Card.Divider />
+    <Text>날짜: {formatDate(new Date(item.use_date))}</Text>
+    <Text>사용 포인트: {item.mileage_category.usepoint}</Text>
+    <Text>사용처: {item.mileage_category.name}</Text>
+  </Card>
+))}
+
+
+</ScrollView>
+
     </Background>
   );
 };
