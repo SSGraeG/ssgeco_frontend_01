@@ -3,22 +3,37 @@
     "version": ">= 5.9.1"
   },
   "build": {
+    "development": {
+      "android": {
+        "buildType": "apk",
+        "gradleCommand": ":app:assembleDebug",
+        "developmentClient": true,
+        "distribution": "internal",
+        "env": {
+          "APP_ICON": "./src/assets/icon.png",
+          "APP_NAME": "ECO (Test)",
+          "EXPO_PUBLIC_API_URL": "http://3.39.0.215:5000"
+        }
+      }
+    },
     "preview": {
+      "distribution": "internal",
       "android": {
-        "buildType": "apk"
+        "buildType": "apk",
+        "env": {
+          "APP_ICON": "./src/assets/icon.png",
+          "EXPO_PUBLIC_API_URL": "http://3.39.0.215:5000"
+        }
       }
     },
-    "preview2": {
+    "production": {
+      "node": "18.18.2",
       "android": {
-        "gradleCommand": ":app:assembleRelease"
+        "buildType": "apk",
+        "env": {
+          "EXPO_PUBLIC_API_URL": "http://3.39.0.215:5000"
+        }
       }
-    },
-    "preview3": {
-      "developmentClient": true
-    },
-    "preview4": {
-      "distribution": "internal"
-    },
-    "production": {}
+    }
   }
 }
