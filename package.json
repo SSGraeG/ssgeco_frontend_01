@@ -15,7 +15,9 @@
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/stack": "6.3.20",
     "expo": "49.0.21",
+    "expo-build-properties": "^0.8.3",
     "expo-camera": "~13.4.4",
+    "expo-dev-client": "~2.4.12",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
     "react": "18.2.0",
@@ -36,8 +38,7 @@
     "semver": "^7.5.4",
     "sharp": "^0.33.1",
     "uglify-js": "^3.17.4",
-    "uuid": "^9.0.1",
-    "expo-dev-client": "~2.4.12"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@babel/core": "7.23.6",

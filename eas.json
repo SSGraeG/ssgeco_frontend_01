@@ -22,7 +22,7 @@
         "buildType": "apk",
         "env": {
           "APP_ICON": "./src/assets/icon.png",
-          "EXPO_PUBLIC_API_URL": "http://3.39.0.215:5000"
+          "EXPO_PUBLIC_API_URL": "http://172.20.132.120:5000"
         }
       }
     },
