@@ -10,9 +10,9 @@
         "developmentClient": true,
         "distribution": "internal",
         "env": {
-          "APP_ICON": "./src/assets/icon.png",
+          "APP_ICON": "./assets/icon.png",
           "APP_NAME": "ECO (Test)",
-          "EXPO_PUBLIC_API_URL": "http://3.39.0.215:5000"
+          "EXPO_PUBLIC_API_URL": "http://3.34.131.103:5000"
         }
       }
     },
@@ -21,8 +21,8 @@
       "android": {
         "buildType": "apk",
         "env": {
-          "APP_ICON": "./src/assets/icon.png",
-          "EXPO_PUBLIC_API_URL": "http://172.20.132.120:5000"
+          "APP_ICON": "./assets/icon.png",
+          "EXPO_PUBLIC_API_URL": "http://3.34.131.103:5000"
         }
       }
     },
@@ -31,7 +31,8 @@
       "android": {
         "buildType": "apk",
         "env": {
-          "EXPO_PUBLIC_API_URL": "http://3.39.0.215:5000"
+          "APP_ICON": "./assets/icon.png",
+          "EXPO_PUBLIC_API_URL": "http://3.34.131.103:5000"
         }
       }
     }
