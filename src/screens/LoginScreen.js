@@ -82,11 +82,11 @@ export default function LoginScreen({ navigation }) {
         secureTextEntry
       />
       <View style={styles.forgotPassword}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('ResetPasswordScreen')}
-        >
-          <Text style={styles.forgot}>비밀번호 찾기</Text>
-        </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('ResetPasswordScreen')}
+      >
+      <Text style={styles.forgot}>비밀번호 찾기</Text>
+      </TouchableOpacity>
       </View>
       <Button mode="contained" onPress={onLoginPressed}>
         로그인
@@ -95,7 +95,7 @@ export default function LoginScreen({ navigation }) {
         <Text>계정이 없나요? </Text>
         <TouchableOpacity onPress={() => navigation.replace('RegisterScreen')}>
           <Text style={styles.link}>회원가입</Text>
-        </TouchableOpacity>
+       </TouchableOpacity>
       </View>
     </Background>
   )
