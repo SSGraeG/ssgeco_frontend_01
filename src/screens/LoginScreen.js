@@ -16,6 +16,7 @@ export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+  console.log(apiUrl)
 
   const onLoginPressed = () => {
     const emailError = emailValidator(email.value)
@@ -26,7 +27,7 @@ export default function LoginScreen({ navigation }) {
       return
     }
     
-    fetch(`${apiUrl}/login`, {
+    fetch(apiUrl + '/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -82,11 +83,11 @@ export default function LoginScreen({ navigation }) {
         secureTextEntry
       />
       <View style={styles.forgotPassword}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('ResetPasswordScreen')}
-        >
-          <Text style={styles.forgot}>비밀번호 찾기</Text>
-        </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('ResetPasswordScreen')}
+      >
+      <Text style={styles.forgot}>비밀번호 찾기</Text>
+      </TouchableOpacity>
       </View>
       <Button mode="contained" onPress={onLoginPressed}>
         로그인
@@ -95,7 +96,7 @@ export default function LoginScreen({ navigation }) {
         <Text>계정이 없나요? </Text>
         <TouchableOpacity onPress={() => navigation.replace('RegisterScreen')}>
           <Text style={styles.link}>회원가입</Text>
-        </TouchableOpacity>
+       </TouchableOpacity>
       </View>
     </Background>
   )

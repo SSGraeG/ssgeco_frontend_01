@@ -21,15 +21,14 @@
         "NSCameraUsageDescription": "이 앱에서는 카메라가 필요합니다"
       },
       "supportsTablet": true,
-      "bundleIdentifier": "com.hwan515.simplelogintemplate"
+      "bundleIdentifier": "com.hwan515.ECO"
     },
     "android": {
       "permissions": ["CAMERA"],
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.hwan515.simplelogintemplate"
+      "package": "com.hwan515.ECO"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -37,7 +36,26 @@
     "extra": {
       "eas": {
         "projectId": "b97cebcd-cd67-4b58-bbb9-e2342bce49d4"
+      },
+      "networking": {
+        "http": {
+          "android": {
+            "config": {
+              "cleartext": true
+            }
+          }
+        }
       }
-    }
+    },
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ]
+    ]
   }
 }
