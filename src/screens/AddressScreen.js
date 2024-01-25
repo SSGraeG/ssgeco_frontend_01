@@ -14,8 +14,8 @@ export default function AddressSearchScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.backButtonContainer}>
-        <BackButton goBack={() => navigation.navigate('RegisterScreen')} />
+      <View style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }}>
+            <BackButton goBack={() => navigation.navigate('RegisterScreen')} />
       </View>
       <View style={styles.postcodeContainer}>
         <Postcode
@@ -33,12 +33,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-  },
-  backButtonContainer: {
-    position: 'absolute',
-    top: 0,
-    left: 20,
-    zIndex: 1,
   },
   postcodeContainer: {
     marginTop: 150,

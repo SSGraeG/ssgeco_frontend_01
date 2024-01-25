@@ -72,7 +72,9 @@ export default function RegisterScreen({ route }) {
 
   return (
     <Background>
-      <BackButton goBack={navigation.goBack} />
+      <View style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }}>
+        <BackButton goBack={navigation.goBack} />
+      </View>
       <Header>회원가입</Header>
       <TextInput
         label="사용자 이름"
