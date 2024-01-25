@@ -32,7 +32,7 @@
         "buildType": "apk",
         "env": {
           "APP_ICON": "./assets/icon.png",
-          "EXPO_PUBLIC_API_URL": "http://3.34.131.103:5000"
+          "EXPO_PUBLIC_API_URL": "https://user01.ssgeco.store/"
         }
       }
     }
