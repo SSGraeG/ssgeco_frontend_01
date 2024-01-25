@@ -39,12 +39,12 @@ export default function ProfilePage() {
 
     return (
         <Background>
-            <BackButton goBack={() => navigation.navigate('Dashboard')} />
-            <Logo />
-            <Header>회원 정보</Header>
-            <Paragraph>이름: {userInfo.name}</Paragraph>
-            <Paragraph>이메일: {userInfo.email}</Paragraph>
-            <Paragraph>주소: {userInfo.address}</Paragraph>
-        </Background>
+    <BackButton goBack={() => navigation.navigate('Dashboard')} />
+    <Logo />
+    <Header>회원 정보</Header>
+    <Paragraph>이름: {userInfo.name}</Paragraph>
+    <Paragraph>이메일: {userInfo.email}</Paragraph>
+    <Paragraph>주소: {userInfo.address}</Paragraph>
+    </Background>
     );
 }

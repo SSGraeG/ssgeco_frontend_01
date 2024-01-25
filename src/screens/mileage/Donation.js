@@ -21,7 +21,7 @@ const Donation = ({ navigation }) => {
           'Content-Type': 'application/json',
           'x-access-token': token,
         },
-        body: JSON.stringify({ coupon_id: coupon.id }), // 해당 쿠폰의 ID 전송
+        body: JSON.stringify({ donation_id: coupon.id }), // 해당 쿠폰의 ID 전송
       });
   
       if (response.status === 200) {
