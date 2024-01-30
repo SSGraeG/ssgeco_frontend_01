@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { View } from 'react-native'
 import Background from '../components/Background'
 import BackButton from '../components/BackButton'
 import Logo from '../components/Logo'
@@ -21,7 +22,9 @@ export default function ResetPasswordScreen({ navigation }) {
 
   return (
     <Background>
-      <BackButton goBack={navigation.goBack} />
+      <View style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }}>
+        <BackButton goBack={navigation.goBack} />
+      </View>
       <Logo />
       <Header>비밀번호 찾기</Header>
       <TextInput

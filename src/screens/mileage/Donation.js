@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { Card } from 'react-native-elements';
 import Background from '../../components/Background';
 import Logo from '../../components/Logo';
@@ -21,7 +21,7 @@ const Donation = ({ navigation }) => {
           'Content-Type': 'application/json',
           'x-access-token': token,
         },
-        body: JSON.stringify({ coupon_id: coupon.id }), // 해당 쿠폰의 ID 전송
+        body: JSON.stringify({ donation_id: coupon.id }), // 해당 쿠폰의 ID 전송
       });
   
       if (response.status === 200) {
@@ -102,7 +102,9 @@ const Donation = ({ navigation }) => {
 
   return (
     <Background>
-      <BackButton goBack={() => navigation.navigate('Dashboard')} />
+      <View style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }}>
+        <BackButton goBack={() => navigation.navigate('Dashboard')} />
+      </View>
       <Logo />
       <Header>쿠폰 사용하기</Header>
       <Text style={styles.mileageText}>현재 마일리지: {currentMileage}점</Text>

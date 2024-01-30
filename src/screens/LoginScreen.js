@@ -58,7 +58,9 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <Background>
-      <BackButton goBack={() => navigation.navigate('StartScreen')} />
+      <View style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }}>
+        <BackButton goBack={() => navigation.navigate('StartScreen')} />
+      </View>
       <Logo />
       <Header>ECO 마일리지</Header>
       <TextInput
