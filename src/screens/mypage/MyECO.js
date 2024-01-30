@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Card } from 'react-native-elements';
 import Background from '../../components/Background';
-import Logo from '../../components/Logo';
 import Header from '../../components/Header';
 import BackButton from '../../components/BackButton';
 import { useNavigation } from '@react-navigation/native';
@@ -42,8 +41,9 @@ export default function MyECO() {
 
   return (
     <Background>
-      <BackButton goBack={() => navigation.navigate('Dashboard')} />
-      <Logo />
+      <View style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }}>
+        <BackButton goBack={() => navigation.navigate('Dashboard')} />
+      </View>
       <Header>My ECO</Header>
       <Card containerStyle={styles.cardStyle}>
         <Card.Title>마일리지 정보</Card.Title>
