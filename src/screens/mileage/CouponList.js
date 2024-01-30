@@ -106,7 +106,7 @@ const CouponList = ({ navigation }) => {
         <BackButton goBack={() => navigation.navigate('Dashboard')} />
       </View>
       <Logo />
-      <Header>쿠폰 전환하기</Header>
+      <Header>쿠폰 교환하기</Header>
       <Text style={styles.mileageText}>현재 마일리지: {currentMileage}점</Text>
 
       <ScrollView style={styles.scrollView}>
@@ -143,6 +143,12 @@ const styles = StyleSheet.create({
     width: '90%',
     alignSelf: 'center',
     marginBottom: 10,
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   mileageText: {
     fontSize: 16,

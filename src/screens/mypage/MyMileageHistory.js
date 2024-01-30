@@ -208,7 +208,7 @@ const MileageHistory = ({ navigation }) => {
    
 <ScrollView style={styles.container}>
 {history.map((item, index) => (
-  <Card key={index}>
+  <Card containerStyle={styles.cardStyle} key={index}>
     <Card.Title>사용 내역</Card.Title>
     <Card.Divider />
     <Text>날짜: {formatDate(new Date(item.use_date))}</Text>
@@ -280,6 +280,14 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginHorizontal: 10
+  },
+  cardStyle: {
+    borderRadius: 10, // 모서리 둥글게
+    shadowColor: "#000", // 그림자 색상
+    shadowOffset: { width: 0, height: 2 }, // 그림자 위치
+    shadowOpacity: 0.25, // 그림자 투명도
+    shadowRadius: 3.84, // 그림자 블러 반경
+    elevation: 5, // 안드로이드에서 그림자 효과
   },
 });
 
