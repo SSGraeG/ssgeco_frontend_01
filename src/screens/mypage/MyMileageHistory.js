@@ -168,7 +168,9 @@ const MileageHistory = ({ navigation }) => {
 
   return (
     <Background>
-      <BackButton goBack={() => navigation.navigate('Dashboard')} />
+      <View style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }}>
+        <BackButton goBack={() => navigation.navigate('Dashboard')} />
+      </View>
       <Header>마일리지 사용 내역</Header>
       <TouchableOpacity onPress={showCalendar} style={styles.button}>
         <Text>날짜 범위 선택</Text>
