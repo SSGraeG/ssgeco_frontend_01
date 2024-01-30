@@ -104,7 +104,7 @@ const Donation = ({ navigation }) => {
     <Background>
       <BackButton goBack={() => navigation.navigate('Dashboard')} />
       <Logo />
-      <Header>쿠폰 사용하기</Header>
+      <Header>마일리지 기부하기</Header>
       <Text style={styles.mileageText}>현재 마일리지: {currentMileage}점</Text>
 
       <ScrollView style={styles.scrollView}>
@@ -126,7 +126,7 @@ const Donation = ({ navigation }) => {
           </Card>
         ))
       ) : (
-        <Text style={styles.noCouponsText}>사용 가능한 쿠폰이 없습니다.</Text>
+        <Text style={styles.noCouponsText}>기부 가능한 곳 없습니다.</Text>
       )}
       </ScrollView>
     </Background>
@@ -141,6 +141,12 @@ const styles = StyleSheet.create({
     width: '90%',
     alignSelf: 'center',
     marginBottom: 10,
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   mileageText: {
     fontSize: 16,
